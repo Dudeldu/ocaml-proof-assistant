@@ -1,0 +1,47 @@
+//#code
+let rec nlen n l = match l with [] -> 0
+  | h::t -> n + nlen n t
+
+let rec fold_left f a l = match l with [] -> a
+  | h::t -> fold_left f (f a h) t
+
+let rec map f l = match l with [] -> []
+  | h::t -> f h :: map f t
+
+let (+) a b = a + b
+//#endcode
+
+lemma 2: fold_left (+) (a + b) xs <=> b + (fold_left (+) a xs)
+//#proof
+!! Try to proof this one !!
+//#qed
+
+lemma 1: nlen n l <=> fold_left (+) 0 (map (fun _ -> n) l)
+//#proof
+induction on size of l:
+
+== size l = 0:
+nlen n []
+(rule nlen) = (match [] with | [] -> 0 | h::t -> n + (nlen n t))
+(rule match) = 0
+
+fold_left (+) 0 (map (fun _ -> n) [])
+(rule map) = fold_left (+) 0  ((match [] with | [] -> [] | h::t -> (((fun _ -> n)) h) :: (map (fun _ -> n) t)) )
+(rule match) = fold_left (+) 0 []
+(rule fold_left) = (match [] with | [] -> 0 | h::t -> fold_left (+) (0 + h) t)
+(rule match) = 0
+
+== size l > 0:
+nlen n (l::ls)
+(rule nlen) = (match l :: ls with | [] -> 0 | h::t -> n + (nlen n t))
+(rule match) = n + (nlen n ls)
+
+fold_left (+) 0 (map (fun _ -> n) (l::ls))
+(rule map) = fold_left (+) 0  ((match l :: ls with    | [] -> []    | h::t -> (((fun _ -> n)) h) :: (map (fun _ -> n) t)) )
+(rule match) = fold_left (+) 0 (((fun _ -> n) l) :: (map (fun _ -> n) ls))
+(rule fun) = fold_left (+) 0 ((n ) :: (map (fun _ -> n) ls))
+(rule fold_left) = (match n :: (map (fun _ -> n) ls) with | [] -> 0 | h::t -> fold_left (+) (0 + h) t)
+(rule match) = fold_left (+) (0 + n) (map (fun _ -> n) ls)
+(rule 'lemma 2') = n + (fold_left (+) 0 (map (fun _ -> n) ls))
+(rule I.H.) = n + (nlen n ls)
+//#qed

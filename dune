@@ -1,0 +1,6 @@
+(executable
+ (name extension)
+ (modes js)
+ (preprocess
+  (pps js_of_ocaml-ppx))
+ (libraries str compiler-libs.common proofing vscode))

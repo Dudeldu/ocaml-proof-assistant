@@ -1,0 +1,124 @@
+{
+    "scopeName": "proof.source",
+    "patterns": [
+        {
+            "include": "#code-block"
+        },
+        {
+            "include": "#proof-block"
+        },
+        {
+            "include": "#lemma"
+        }
+    ],
+    "repository": {
+        "code-block": {
+            "begin": "//#code",
+            "end": "//#endcode",
+            "contentName": "meta.embedded.block.ocaml",
+            "beginCaptures": {
+                "0": {
+                    "name": "comment.line"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "comment.line"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.ocaml"
+                }
+            ]
+        },
+        "proof-block": {
+            "begin": "//#proof",
+            "end": "//#qed",
+            "name": "proof.group",
+            "patterns": [
+                {
+                    "include": "#rule-application"
+                },
+                {
+                    "include": "#induction-header"
+                },
+                {
+                    "include": "#induction-base-step-header"
+                }
+            ],
+            "beginCaptures": {
+                "0": {
+                    "name": "comment.line"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "comment.line"
+                }
+            }
+        },
+        "rule-application": {
+            "match": "\\((rule) (fun|let|match|arith|I[.]H[.]|\\'lemma [1-9][0-9]*\\'|[A-Za-z0-9_]+)\\) =(.*)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control"
+                },
+                "2": {
+                    "name": "constant.language.rule"
+                },
+                "3": {
+                    "name": "meta.embedded.block.ocaml",
+                    "patterns": [
+                        {
+                            "include": "source.ocaml"
+                        }
+                    ]
+                }
+            }
+        },
+        "lemma": {
+            "match": "lemma [1-9][0-9]*:\\s?(.*)<=>(.*)",
+            "captures": {
+                "1": {
+                    "name": "meta.embedded.block.ocaml",
+                    "patterns": [
+                        {
+                            "include": "source.ocaml"
+                        }
+                    ]
+                },
+                "2": {
+                    "name": "meta.embedded.block.ocaml",
+                    "patterns": [
+                        {
+                            "include": "source.ocaml"
+                        }
+                    ]
+                }
+            }
+        },
+        "induction-header": {
+            "match": "induction on (size of )?([A-Za-z0-9]+):",
+            "captures": {
+                "2": {
+                    "name": "entity.name.function"
+                }
+            }
+        },
+        "induction-base-step-header": {
+            "match": "== (size of )?([A-Za-z0-9]+) (=|>) (0):",
+            "captures": {
+                "2": {
+                    "name": "entity.name.function"
+                },
+                "3": {
+                    "name": "keyword.operator.ocaml"
+                },
+                "4": {
+                    "name": "constant.numeric"
+                }
+            }
+        }
+    }
+}

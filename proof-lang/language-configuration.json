@@ -1,0 +1,8 @@
+{
+    "folding": {
+        "markers": {
+            "start": "^\\s*//\\s*#?(proof|code)\\b",
+            "end": "^\\s*//\\s*#?(qed|endcode)\\b"
+        }
+    }
+}

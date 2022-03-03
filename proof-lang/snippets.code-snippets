@@ -1,0 +1,67 @@
+{
+    "code": {
+        "prefix": [
+            "code"
+        ],
+        "body": [
+            "//#code",
+            "${1}",
+            "//#endcode"
+        ],
+        "description": "Related code block"
+    },
+    "lemma": {
+        "prefix": [
+            "lemma",
+            "Lemma",
+            "proof"
+        ],
+        "body": [
+            "lemma ${1}: ${2} <=> ${3}",
+            "//#proof",
+            "${4}",
+            "//#qed"
+        ],
+        "description": "Start a new lemma"
+    },
+    "size-induction": {
+        "prefix": [
+            "induction",
+            "induct on"
+        ],
+        "body": [
+            "induction on size of ${1}:",
+            "",
+            "== size ${1} = 0:",
+            "${2}",
+            "== size ${1} > 0:",
+            "${3}"
+        ],
+        "description": "Proof by induction on size of something"
+    },
+    "induction": {
+        "prefix": [
+            "induction",
+            "induct on"
+        ],
+        "body": [
+            "induction on ${1}:",
+            "",
+            "== ${1} = 0:",
+            "${2}",
+            "== ${1} > 0:",
+            "${3}"
+        ],
+        "description": "Proof by induction on something"
+    },
+    "rule": {
+        "prefix": [
+            "rule",
+            "(rule"
+        ],
+        "body": [
+            "(rule ${1}) = "
+        ],
+        "description": "Application of a single rule"
+    }
+}

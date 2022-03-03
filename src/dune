@@ -1,0 +1,3 @@
+(library
+ (name proofing)
+ (libraries compiler-libs.common))

@@ -1,0 +1,54 @@
+{
+  "name": "proof-assistant",
+  "displayName": "Ocaml Proofing Assistent",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Other",
+    "Education",
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:proof"
+  ],
+  "main": "./_build/default/extension.bc.js",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "proof",
+        "path": "./proof-lang/snippets.code-snippets"
+      }
+    ],
+    "languages": [
+      {
+        "id": "proof",
+        "extensions": [
+          ".proof"
+        ],
+        "firstLine": "#proof",
+        "configuration": "./proof-lang/language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "proof",
+        "scopeName": "proof.source",
+        "path": "./proof-lang/grammar.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.ocaml": "ocaml"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "dune build .",
+    "test": "dune runtest"
+  },
+  "dependencies": {
+    "@types/vscode": "^1.63.1"
+  }
+}
